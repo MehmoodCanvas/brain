@@ -16,6 +16,14 @@ class Process extends Controller
         $question->save();
         return redirect()->back()->with('success', 'Question Added!');
     }
+
+    public function update_question(Request $request,$id){
+        $question= Questions::find($id);
+        $question->questions_question=$request->questions_question;
+        $question->questions_answer=$request->questions_answer;
+        $question->save();
+        return redirect()->back()->with('success', 'Question Updated!');
+    }
     public function update_category(Request $request,$id){
         $category= Category::find($id);
         if($request->hasFile('category_image')){

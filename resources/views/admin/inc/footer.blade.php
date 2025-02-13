@@ -37,6 +37,44 @@
   </div>
 </div>
 
+<div class="modal fade" id="editexampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form  action="{{url('admin/update-question/')}}" id="question_update" method='post' enctype="multipart/form-data" >
+          @csrf
+          @method('PUT')
+          <section class="section">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Update Question</h5>
+                        <div id='slideupload' class="row mb-3">
+                          <label for="inputText" class="col-sm-12 col-form-label">Question</label>
+                          <div class="col-sm-12">
+                            <input type="text"  name='questions_question' id="questions_question" class="form-control">
+                          </div>
+                          <label for="inputText" class="col-sm-12 col-form-label">Answer</label>
+                          <div class="col-sm-12">
+                            <input type="text"  name='questions_answer' id="questions_answer" class="form-control">
+                          </div>
+                        </div>
+                        <div class="row mb-3">
+                          <div class="col-sm-10">
+                              <input type="submit" value="Update Question" class='btn btn-success'>
+                          </div>
+                        </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ======= Footer ======= -->
  <footer id="footer" class="footer">
@@ -63,9 +101,9 @@
   <script>
 $('.edit').on('click', function() {
     var id = $(this).data('id');
-    $('#category_update').attr('action', '{{url('admin/update-category')}}' + '/' +id);
-    $('#category_name').val($(this).data('name'));
-    $('#category_description').val($(this).data('description'));
+    $('#question_update').attr('action', '{{url('admin/update-question')}}' + '/' +id);
+    $('#questions_question').val($(this).data('question'));
+    $('#questions_answer').val($(this).data('answer'));
 });
   </script>
   <script>

@@ -27,7 +27,7 @@
             <td> {{$loop->iteration}}</td>
             <td> {{$question->questions_question}}</td>
             <td> {{$question->questions_answer}}</td>        
-            <td><a href='{{url('admin/question/view/'.$question->questions_id)}}' class="btn btn-success"><i class="bi bi-eye"></i></a><a href="{{url('admin/delete/question/'.$question->questions_id)}}" class="btn btn-danger"><i class="bi bi-archive"></i></a></td>
+            <td><a class="btn btn-success edit" data-id="{{$question->questions_id}}" data-answer="{{$question->questions_answer}}" data-question="{{$question->questions_question}}" data-bs-toggle="modal" data-bs-target="#editexampleModal" ><i class="bi bi-pencil-square"></i></a><a href="{{url('admin/delete/question/'.$question->questions_id)}}" class="btn btn-danger"><i class="bi bi-archive"></i></a></td>
           </tr>
           @endforeach
         </tbody>

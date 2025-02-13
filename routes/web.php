@@ -41,6 +41,8 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
     //POST METHOD
     Route::post('post-question/',[Process::class,'store_question']);
+    Route::put('update-question/{id}',[Process::class,'update_question']);
+
     
 });
 //Admin End 
