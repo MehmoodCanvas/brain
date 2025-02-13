@@ -115,52 +115,6 @@ class Process extends Controller
         return redirect()->back()->with('success', 'Event Page Updated!');
     }
 
-    public function aboutpage(Request $request){
-        $aboutpage= Aboutpage::find(1);
-        if($request->hasFile('aboutpages_banner_image')){
-            $file = $request->file('aboutpages_banner_image');
-            $filename = time().$file->getClientOriginalName();
-            $file->move(public_path('storage/aboutpage'), $filename);
-            $aboutpage->aboutpages_banner_image=$filename;
-        }
-        if($request->hasFile('aboutpages_sec_two_image')){
-            $file = $request->file('aboutpages_sec_two_image');
-            $filename = time().$file->getClientOriginalName();
-            $file->move(public_path('storage/aboutpage'), $filename);
-            $aboutpage->aboutpages_sec_two_image=$filename;
-        }
-        if($request->hasFile('aboutpages_sec_three_image')){
-            $file = $request->file('aboutpages_sec_three_image');
-            $filename = time().$file->getClientOriginalName();
-            $file->move(public_path('storage/aboutpage'), $filename);
-            $aboutpage->aboutpages_sec_three_image=$filename;
-        }
-        if($request->hasFile('aboutpages_sec_four_heading_image')){
-            $file = $request->file('aboutpages_sec_four_heading_image');
-            $filename = time().$file->getClientOriginalName();
-            $file->move(public_path('storage/aboutpage'), $filename);
-            $aboutpage->aboutpages_sec_four_heading_image=$filename;
-        }
-        
-        $aboutpage->aboutpages_sec_one_main_heading=$request->aboutpages_sec_one_main_heading;
-        $aboutpage->aboutpages_sec_one_main_heading_text=$request->aboutpages_sec_one_main_heading_text;
-        $aboutpage->aboutpages_sec_two_heading=$request->aboutpages_sec_two_heading;
-        $aboutpage->aboutpages_sec_two_image_name=$request->aboutpages_sec_two_image_name;
-        $aboutpage->aboutpages_sec_two_image_text=$request->aboutpages_sec_two_image_text;
-        $aboutpage->aboutpages_sec_three_image_name=$request->aboutpages_sec_three_image_name;
-        $aboutpage->aboutpages_sec_three_image_text=$request->aboutpages_sec_three_image_text;
-        $aboutpage->aboutpages_sec_four_heading=$request->aboutpages_sec_four_heading;
-        $aboutpage->aboutpages_sec_four_heading_image_text=$request->aboutpages_sec_four_heading_image_text;
-        $aboutpage->aboutpages_sec_five_heading=$request->aboutpages_sec_five_heading;
-        $aboutpage->aboutpages_sec_five_heading_text=$request->aboutpages_sec_five_heading_text;
-        $aboutpage->aboutpages_sec_six_heading_one=$request->aboutpages_sec_six_heading_one;
-        $aboutpage->aboutpages_sec_six_heading_two=$request->aboutpages_sec_six_heading_two;
-        $aboutpage->aboutpages_sec_six_button_text=$request->aboutpages_sec_six_button_text;
-        
-
-        $aboutpage->update();
-        return redirect()->back()->with('success', 'Event Page Updated!');
-    }
 
     public function contactpage(Request $request){
         $contactpage=  Contactpage::find(1);

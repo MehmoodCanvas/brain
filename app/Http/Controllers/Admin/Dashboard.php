@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\DB;
 class Dashboard extends Controller
 {
     public function index(){
-        return view('admin.index');
+        $questions=DB::table('questions')->orderBy('questions_id','DESC')->get();
+        
+        return view('admin.index',compact('questions'));
     }
 
 
