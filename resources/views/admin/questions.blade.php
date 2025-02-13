@@ -17,8 +17,8 @@
       <table class="table datatable">
         <thead>
             <th>So.No</th>
-            <th>Question Name</th>
-            <th>Answer Email</th>
+            <th>Question</th>
+            <th>Answer</th>
             <th>Action</th>
         </thead>
         <tbody>
