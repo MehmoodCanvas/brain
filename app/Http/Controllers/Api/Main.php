@@ -15,14 +15,14 @@ class Main extends Controller
         if(count($questions) <= 0){
             return response()->json([
                 'status' => 204,
-                'message' => 'Succeed No Data Avaiable',
+                'message' => 'Request Succeed But No Data Avaiable',
             ]);
-        }else{
+        }
+        else{
             return response()->json([
                 'status' => 200,
                 'questions'=>$questions,
             ]);
         }
-       
     }
 }

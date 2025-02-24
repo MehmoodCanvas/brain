@@ -18,7 +18,6 @@ class Process extends Controller
         $question->questions_answer=json_encode($request->questions_answer);
         $question->questions_correct_answer=$request->questions_correct_answer;
         $question->questions_category=$request->questions_category;
-
         $question->save();
         return redirect()->back()->with('success', 'Question Added!');
     }
@@ -42,7 +41,7 @@ class Process extends Controller
     public function delete($path,$id){
         if($path =='question'){
             $question = Questions::find($id);
-            
+
             $question->delete();
         }
 
