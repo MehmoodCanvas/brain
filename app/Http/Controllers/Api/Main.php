@@ -11,7 +11,6 @@ class Main extends Controller
 {
     public function index(Request $request){
         $category_id = $request->category;
-
         $questions = Questions::where('questions_category',$category_id)->get(['questions_question as question', 'questions_answer', 'questions_correct_answer as CorrectanswerIndex']);
         if(count($questions) <= 0){
             return response()->json([
