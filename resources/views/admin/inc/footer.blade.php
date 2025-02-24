@@ -187,6 +187,7 @@ html2pdf().set(opt).from(element).save().then(function () {
   });
 </script>
 <script>
+  
   $(document).ready(function(){
       $('.edit').on('click', function(){
           let id = $(this).data('id');
