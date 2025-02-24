@@ -1,41 +1,4 @@
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-body">
-        <form  action="{{url('admin/post-question/')}}" method='post' enctype="multipart/form-data" >
-          @csrf
-          <section class="section">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">Add Question</h5>
-                        <div id='slideupload' class="row mb-3">
-                          <label for="inputText" class="col-sm-12 col-form-label">Question</label>
-                          <div class="col-sm-12">
-                            <input type="text"  name='questions_question' class="form-control">
-                          </div>
-                          <label for="inputText" class="col-sm-12 col-form-label">Answer</label>
-                          <div class="col-sm-12">
-                            <input type="text"  name='questions_answer' class="form-control">
-                          </div>
-                        </div>
-                        <div class="row mb-3">
-                          <div class="col-sm-10">
-                              <input type="submit" value="Submit New Question" class='btn btn-success'>
-                          </div>
-                        </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-      </div>
-    </div>
-  </div>
-</div>
 
 <div class="modal fade" id="editexampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -76,6 +39,44 @@
   </div>
 </div>
 
+<div class="modal fade" id="categoryModal" tabindex="-1" aria-labelledby="categoryModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form  action="{{url('admin/post-category/')}}" method='post' enctype="multipart/form-data" >
+          @csrf
+          <section class="section">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Add Category</h5>
+                        <div id='slideupload' class="row mb-3">
+                          <label for="inputText" class="col-sm-12 col-form-label">Category Name</label>
+                          <div class="col-sm-12">
+                            <input type="text"  name='categories_name' class="form-control" required>
+                          </div>
+                          <label for="inputText" class="col-sm-12 col-form-label">Category Description</label>
+                          <div class="col-sm-12">
+                            <input type="text"  name='categories_description' class="form-control">
+                          </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                          <div class="col-sm-10">
+                              <input type="submit" value="Submit New Category" class='btn btn-success'>
+                          </div>
+                        </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- ======= Footer ======= -->
  <footer id="footer" class="footer">
     <div class="copyright">
@@ -110,16 +111,7 @@ $('.edit').on('click', function() {
         $('.input-images').imageUploader();
         $('.input-images2').imageUploader2();
    </script>
-<script>
-  $('.selection').on('change', function(){
-    var type = $(this).find('option:selected').data('type');
-     if(type === 'color') {
-       $('#variant_name').prop('type', 'color');
-     } else {
-       $('#variant_name').prop('type', 'text');
-     }
-  });
-</script>
+
 
 <script>
     function downloadpdf(){

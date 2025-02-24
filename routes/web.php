@@ -35,12 +35,14 @@ Route::get('/admin',function(){
 Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/dashboard', [Dashboard::class, 'index']);
     Route::get('/questions', [Dashboard::class, 'questions']);
- 
+    Route::get('/categories', [Dashboard::class, 'categories']);
 
     Route::get('delete/{category}/{id}', [Process::class, 'delete']);
 
     //POST METHOD
     Route::post('post-question/',[Process::class,'store_question']);
+    Route::post('post-category/',[Process::class,'store_category']);
+
     Route::put('update-question/{id}',[Process::class,'update_question']);
 
     

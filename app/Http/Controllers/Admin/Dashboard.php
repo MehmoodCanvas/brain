@@ -19,15 +19,17 @@ class Dashboard extends Controller
 
 
     public function questions(){
-        $questions=DB::table('questions')->orderBy('questions_id','DESC')->get();
-        return view('admin.questions',compact('questions'));
+        $questions=DB::table('questions')->orderBy('questions_id','DESC')->join('categories','questions_category','=','categories_id')->get();
+        $categories=DB::table('categories')->orderBy('categories_id','DESC')->get();
+
+        return view('admin.questions',compact('questions','categories'));
 
     }
 
-    public function community(){
-        $community=DB::table('member')->where('member_type','community')->orderBy('member_id','DESC')->get();
+    public function categories(){
+        $categories=DB::table('categories')->orderBy('categories_id','DESC')->get();
 
-        return view('admin.community',compact('community'));
+        return view('admin.category',compact('categories'));
 
     } 
     public function admins(){

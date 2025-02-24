@@ -335,3 +335,21 @@
   }
 
 })();
+
+
+
+
+var counter = 1; 
+
+$(document).ready(function(){
+    $('#clone_btn').click(function(){
+        var clone = $('.answer_parent').clone().removeClass('answer_parent'); 
+        clone.find('input').val('');
+        clone.find('button').remove();
+        var cloned = $(".answer_clone").append(clone);
+        cloned.find('input[type="radio"]').attr('name', 'questions_correct_answer').attr('id', 'radio'+counter).val(counter);
+        cloned.find('label').attr('for', 'radio'+counter);
+        counter++;
+    });
+});
+

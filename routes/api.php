@@ -18,4 +18,4 @@ use App\Http\Controllers\Api\Main;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('questions',[Main::class,'index']);
+Route::post('questions',[Main::class,'index']);

@@ -129,14 +129,20 @@
       </li>
 
       
-     
-
+      
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{url('admin/questions')}}">
           <i class="bi bi-question-circle-fill"></i>
           <span>Questions Management</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{url('admin/categories')}}">
+          <i class="bi bi-bookmarks-fill"></i>
+          <span>Categories Management</span>
+        </a>
+      </li>
+
     
       <li class="nav-heading">General Setting</li>
       <li class="nav-item">
