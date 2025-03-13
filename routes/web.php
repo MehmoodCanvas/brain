@@ -36,7 +36,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/dashboard', [Dashboard::class, 'index']);
     Route::get('/questions', [Dashboard::class, 'questions']);
     Route::get('/categories', [Dashboard::class, 'categories']);
-
+    Route::get('edit-question/{id}',[Dashboard::class,'edit_question_get']);
     Route::get('delete/{category}/{id}', [Process::class, 'delete']);
 
     //POST METHOD

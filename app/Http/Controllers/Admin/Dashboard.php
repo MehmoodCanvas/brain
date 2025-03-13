@@ -103,5 +103,12 @@ class Dashboard extends Controller
         $communitylisting = Community_listing::get();
         return view('admin.community-listing', compact('communitylisting'));
     }
+
+
+    public function edit_question_get($id){
+        $questions=DB::table('questions')->where('questions_id',$id)->first();
+        return response()->json($questions);
+
+    }
 }
 

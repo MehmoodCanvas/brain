@@ -100,3 +100,59 @@
     </div>
   </div>
 </div>
+
+
+<div class="modal fade" id="editexampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form  action="{{url('admin/update-question/')}}" id="question_update" method='post' enctype="multipart/form-data" >
+          @csrf
+          @method('PUT')
+          <section class="section">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Update Question</h5>
+                        <div id='slideupload' class="row mb-3">
+                          <label for="inputText" class="col-sm-12 col-form-label">Question</label>
+                          <div class="col-sm-12">
+                            <input type="text"  name='questions_question' id="questions_question" class="form-control">
+                          </div>
+                       
+                        <div class="col-sm-12">
+                          <label for="inputText" class="col-sm-12 col-form-label">Question</label>
+                          <select name="questions_category" id="questions_category" class="form-control">
+                            <option >Select Question Category</option>
+                            @foreach($categories as $category)
+                            <option value="{{$category->categories_id}}">{{$category->categories_name}}</option>
+                            @endforeach
+                          </select>
+                        </div>
+                        <div class="col-sm-12 answer_parent">
+                          <div class="ans_input_wrap">
+                            <label for="inputText" class="col-sm-12 col-form-label">Answer</label>
+                            <input type="radio" class="radio-button__input" id="radio0" name="questions_correct_answer" value="0">
+                            <label class="radio-button__label" for="radio0">
+                              <span class="radio-button__custom"></span>
+                            </label>
+                            <input type="text"  name='questions_answer[]' class="form-control">
+                            <button id="clone_btn" type="button"><i class="bi bi-plus"></i></button>
+                          </div>
+                        </div>
+                        <div class="row mb-3">
+                          <div class="col-sm-10">
+                              <input type="submit" value="Update Question" class='btn btn-success'>
+                          </div>
+                        </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+      </div>
+    </div>
+  </div>
+</div>

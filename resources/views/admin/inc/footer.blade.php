@@ -1,43 +1,5 @@
 
 
-<div class="modal fade" id="editexampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-body">
-        <form  action="{{url('admin/update-question/')}}" id="question_update" method='post' enctype="multipart/form-data" >
-          @csrf
-          @method('PUT')
-          <section class="section">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">Update Question</h5>
-                        <div id='slideupload' class="row mb-3">
-                          <label for="inputText" class="col-sm-12 col-form-label">Question</label>
-                          <div class="col-sm-12">
-                            <input type="text"  name='questions_question' id="questions_question" class="form-control">
-                          </div>
-                          <label for="inputText" class="col-sm-12 col-form-label">Answer</label>
-                          <div class="col-sm-12">
-                            <input type="text"  name='questions_answer' id="questions_answer" class="form-control">
-                          </div>
-                        </div>
-                        <div class="row mb-3">
-                          <div class="col-sm-10">
-                              <input type="submit" value="Update Question" class='btn btn-success'>
-                          </div>
-                        </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-      </div>
-    </div>
-  </div>
-</div>
 
 <div class="modal fade" id="categoryModal" tabindex="-1" aria-labelledby="categoryModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -100,12 +62,94 @@
   <script src="{{asset('assets/admin/js/main.js')}}"></script>
   <script src="{{asset('assets/admin/vendor/multi/image-uploader.min.js')}}"></script>
   <script>
-$('.edit').on('click', function() {
-    var id = $(this).data('id');
-    $('#question_update').attr('action', '{{url('admin/update-question')}}' + '/' +id);
-    $('#questions_question').val($(this).data('question'));
-    $('#questions_answer').val($(this).data('answer'));
+
+var counter = 1; 
+
+$(document).ready(function(){
+    $('#clone_btn').on('click', function(){
+        var answerParent = $('.answer_parent');
+        var answerClone = $('.answer_clone');
+
+        if (answerParent.length && answerClone.length) {
+            var clone = answerParent.clone().removeClass('answer_parent'); 
+            clone.find('input[type="text"]').val(''); 
+            clone.find('button').remove(); 
+
+            var radio = clone.find('input[type="radio"]');
+            var label = clone.find('label[for^="radio"]');
+
+            radio.attr('id', 'radio' + counter);
+            radio.val(counter);
+            label.attr('for', 'radio' + counter);
+
+            answerClone.append(clone); 
+            counter++; 
+        } else {
+            console.error('Required elements are missing in the DOM.');
+        }
+    });
 });
+
+  </script>
+  <script>
+$(document).ready(function() {
+  $('.edit').on('click', function() {
+    var id = $(this).data('id');
+    counter = 1; 
+    
+    $.ajax({
+      url: '{{ url("admin/edit-question") }}/' + id,
+      type: 'GET',
+      success: function(response) {
+        console.log(response);
+        $('#question_update').attr('action', '{{ url("admin/update-question") }}/' + id);
+        $('#questions_question').val(response.questions_question);
+        $('#questions_category').val(response.questions_category);
+
+        $('.answer_parent').not(':first').remove();
+        $('.answer_parent input[type="text"]').val('');
+        $('.answer_parent input[type="radio"]').prop('checked', false);
+
+        try {
+          var answers = JSON.parse(response.questions_answer);
+          var correctIndex = response.correct_answer_index; 
+          if (Array.isArray(answers)) {
+            $.each(answers, function(index, answer) {
+              if (index === 0) {
+                var firstAnswer = $('.answer_parent');
+                firstAnswer.find('input[type="text"]').val(answer);
+                firstAnswer.find('input[type="radio"]').val(index).prop('checked', index == correctIndex);
+              } else {
+                var clone = $('.answer_parent').first().clone().removeClass('answer_parent');
+                clone.find('input[type="text"]').val(answer);
+                clone.find('input[type="radio"]').val(index).prop('checked', index == correctIndex);
+        
+                var radio = clone.find('input[type="radio"]');
+                var label = clone.find('label');
+
+                radio.attr('id', 'radio' + counter);
+                radio.prop('name', 'answer_radio'); 
+                label.attr('for', 'radio' + counter);
+        
+                $('.answer_clone').append(clone);
+                counter++;
+              }
+            });
+          } else {
+            console.error('questions_answer is not a valid array:', answers);
+          }
+        } catch (e) {
+          console.error('Error parsing questions_answer JSON:', e);
+        }
+      },
+      error: function(xhr, status, error) {
+        console.error('Error fetching question data:', error);
+        alert('An error occurred while fetching question data. Please try again.');
+      }
+    });
+  });
+});
+
   </script>
   <script>
         $('.input-images').imageUploader();
