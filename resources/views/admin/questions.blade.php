@@ -130,7 +130,7 @@
                             @endforeach
                           </select>
                         </div>
-                        <div class="col-sm-12 answer_parent">
+                        <div class="col-sm-12 answer_parent_edit">
                           <div class="ans_input_wrap">
                             <label for="inputText" class="col-sm-12 col-form-label">Answer</label>
                             <input type="radio" class="radio-button__input" id="radio0" name="questions_correct_answer" value="0">
@@ -138,7 +138,7 @@
                               <span class="radio-button__custom"></span>
                             </label>
                             <input type="text"  name='questions_answer[]' class="form-control">
-                            <button id="clone_btn" type="button"><i class="bi bi-plus"></i></button>
+                            <button id="clone_btn_edit" type="button"><i class="bi bi-plus"></i></button>
                           </div>
                         </div>
                         <div class="row mb-3">

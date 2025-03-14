@@ -1,6 +1,4 @@
 
-
-
 <div class="modal fade" id="categoryModal" tabindex="-1" aria-labelledby="categoryModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -91,47 +89,53 @@ $(document).ready(function(){
 });
 
   </script>
-  <script>
-$(document).ready(function() {
-  $('.edit').on('click', function() {
+<script>
+$(document).ready(function () {
+  $('.edit').on('click', function () {
     var id = $(this).data('id');
-    counter = 1; 
-    
+    counter = 1;
+
+    // Clear old values
+    $('#question_update').attr('action', '');
+    $('#questions_question').val('');
+    $('#questions_category').val('').change();
+    $('.answer_parent_edit').not(':first').remove(); // Remove all clones
+    $('.answer_parent_edit input[type="text"]').val('');
+    $('.answer_parent_edit input[type="radio"]').prop('checked', false);
+
     $.ajax({
       url: '{{ url("admin/edit-question") }}/' + id,
       type: 'GET',
-      success: function(response) {
-        console.log(response);
+      success: function (response) {
+        console.log(response.questions_category);
         $('#question_update').attr('action', '{{ url("admin/update-question") }}/' + id);
         $('#questions_question').val(response.questions_question);
-        $('#questions_category').val(response.questions_category);
-
-        $('.answer_parent').not(':first').remove();
-        $('.answer_parent input[type="text"]').val('');
-        $('.answer_parent input[type="radio"]').prop('checked', false);
+        $('#questions_category').val(String(response.questions_category)).change();
 
         try {
           var answers = JSON.parse(response.questions_answer);
-          var correctIndex = response.correct_answer_index; 
+          var correctIndex = response.questions_correct_answer;
+
           if (Array.isArray(answers)) {
-            $.each(answers, function(index, answer) {
+            $.each(answers, function (index, answer) {
               if (index === 0) {
-                var firstAnswer = $('.answer_parent');
+                var firstAnswer = $('.answer_parent_edit');
                 firstAnswer.find('input[type="text"]').val(answer);
                 firstAnswer.find('input[type="radio"]').val(index).prop('checked', index == correctIndex);
               } else {
-                var clone = $('.answer_parent').first().clone().removeClass('answer_parent');
+                var clone = $('.answer_parent_edit').first().clone();
+
                 clone.find('input[type="text"]').val(answer);
                 clone.find('input[type="radio"]').val(index).prop('checked', index == correctIndex);
-        
+
                 var radio = clone.find('input[type="radio"]');
                 var label = clone.find('label');
 
                 radio.attr('id', 'radio' + counter);
-                radio.prop('name', 'answer_radio'); 
+                radio.attr('name', 'questions_correct_answer');
                 label.attr('for', 'radio' + counter);
-        
-                $('.answer_clone').append(clone);
+
+                $('.answer_parent_edit').last().after(clone);
                 counter++;
               }
             });
@@ -142,11 +146,28 @@ $(document).ready(function() {
           console.error('Error parsing questions_answer JSON:', e);
         }
       },
-      error: function(xhr, status, error) {
+      error: function (xhr, status, error) {
         console.error('Error fetching question data:', error);
         alert('An error occurred while fetching question data. Please try again.');
       }
     });
+  });
+
+  $(document).on('click', '#clone_btn_edit', function () {
+    var clone = $('.answer_parent_edit').first().clone();
+
+    clone.find('input[type="text"]').val('');
+    clone.find('input[type="radio"]').prop('checked', false);
+
+    var radio = clone.find('input[type="radio"]');
+    var label = clone.find('label');
+
+    radio.attr('id', 'radio' + counter);
+    radio.attr('name', 'questions_correct_answer');
+    label.attr('for', 'radio' + counter);
+
+    $('.answer_parent_edit').last().after(clone);
+    counter++;
   });
 });
 

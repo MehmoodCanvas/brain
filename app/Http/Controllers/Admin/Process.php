@@ -25,8 +25,10 @@ class Process extends Controller
     public function update_question(Request $request,$id){
         $question= Questions::find($id);
         $question->questions_question=$request->questions_question;
-        $question->questions_answer=$request->questions_answer;
-        $question->save();
+        $question->questions_answer=json_encode($request->questions_answer);
+        $question->questions_correct_answer=$request->questions_correct_answer;
+        $question->questions_category=$request->questions_category;
+        $question->update();
         return redirect()->back()->with('success', 'Question Updated!');
     }
     public function store_category(Request $request){
