@@ -59,7 +59,7 @@
   <!-- Template Main JS File -->
   <script src="{{asset('assets/admin/js/main.js')}}"></script>
   <script src="{{asset('assets/admin/vendor/multi/image-uploader.min.js')}}"></script>
-  <script>
+<script>
 
 var counter = 1; 
 
@@ -88,18 +88,16 @@ $(document).ready(function(){
     });
 });
 
-  </script>
+</script>
 <script>
 $(document).ready(function () {
   $('.edit').on('click', function () {
     var id = $(this).data('id');
     counter = 1;
-
-    // Clear old values
     $('#question_update').attr('action', '');
     $('#questions_question').val('');
     $('#questions_category').val('').change();
-    $('.answer_parent_edit').not(':first').remove(); // Remove all clones
+    $('.answer_parent_edit').not(':first').remove(); 
     $('.answer_parent_edit input[type="text"]').val('');
     $('.answer_parent_edit input[type="radio"]').prop('checked', false);
 
@@ -179,24 +177,24 @@ $(document).ready(function () {
 
 
 <script>
-    function downloadpdf(){
+function downloadpdf(){
       document.getElementsByClassName("download_btn")[0].innerHTML='Downloading...';
     var element = document.getElementById('invoice-print');
-  var opt = {
-  margin:       0,
-  filename:     'invoice.pdf',
-  image:        { type: 'jpeg', quality: 1 },
-  html2canvas:  { scale: 2 },
-  jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+    var opt = {
+    margin:       0,
+    filename:     'invoice.pdf',
+    image:        { type: 'jpeg', quality: 1 },
+    html2canvas:  { scale: 2 },
+    jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+  };
+
+  html2pdf().set(opt).from(element).save().then(function () {
+       document.getElementsByClassName("download_btn")[0].innerHTML = 'Completed';
+  }).catch(function (error) {
+    document.getElementsByClassName("download_btn")[0].innerHTML = 'Error In Downloading Invoice, Please Reload';
+  });
+
 };
-
-html2pdf().set(opt).from(element).save().then(function () {
-  document.getElementsByClassName("download_btn")[0].innerHTML = 'Completed';
-}).catch(function (error) {
-  document.getElementsByClassName("download_btn")[0].innerHTML = 'Error In Downloading Invoice, Please Reload';
-});
-
-    };
 
 </script>
 <script type="text/javascript">
@@ -241,10 +239,9 @@ html2pdf().set(opt).from(element).save().then(function () {
               }
           });
       });
-  });
+});
 </script>
 <script>
-  
   $(document).ready(function(){
       $('.edit').on('click', function(){
           let id = $(this).data('id');
@@ -257,7 +254,6 @@ html2pdf().set(opt).from(element).save().then(function () {
           $('#edit_description').val(description);
           $('#edit_status').val(status); 
       });
-
       $('#editForm').on('submit', function(e){
           e.preventDefault();
           let id = $('#edit_id').val();
