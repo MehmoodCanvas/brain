@@ -11,17 +11,23 @@ class Main extends Controller
 {
     public function index(Request $request){
         $category_id = $request->category;
-        $questions = Questions::where('questions_category',$category_id)->get(['questions_question as question', 'questions_answer', 'questions_correct_answer as CorrectanswerIndex']);
-        if(count($questions) <= 0){
+        $questions = Questions::where('questions_category', $category_id)
+            ->get(['questions_question as question', 'questions_answer as answer', 'questions_correct_answer as CorrectanswerIndex']);
+        $questions->transform(function ($item) {
+            if (is_string($item->answer)) {
+                $item->answer = json_decode($item->answer, true);
+            }
+            return $item;
+        });
+        if ($questions->isEmpty()) {
             return response()->json([
                 'status' => 204,
                 'message' => 'Request Succeed But No Data Avaiable',
             ]);
-        }
-        else{
+        } else {
             return response()->json([
                 'status' => 200,
-                'questions'=>$questions,
+                'questions' => $questions,
             ]);
         }
     }
