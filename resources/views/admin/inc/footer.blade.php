@@ -120,19 +120,27 @@ $(document).ready(function () {
                 var firstAnswer = $('.answer_parent_edit');
                 firstAnswer.find('input[type="text"]').val(answer);
                 firstAnswer.find('input[type="radio"]').val(index).prop('checked', index == correctIndex);
-              } else {
-                var clone = $('.answer_parent_edit').first().clone();
-
-                clone.find('input[type="text"]').val(answer);
-                clone.find('input[type="radio"]').val(index).prop('checked', index == correctIndex);
-
-                var radio = clone.find('input[type="radio"]');
-                var label = clone.find('label');
-
+              
+                // Ensure the first radio button and label have unique id/for attributes
+                var radio = firstAnswer.find('input[type="radio"]');
+                var label = firstAnswer.find('label');
                 radio.attr('id', 'radio' + counter);
                 radio.attr('name', 'questions_correct_answer');
                 label.attr('for', 'radio' + counter);
-
+                counter++;
+              } else {
+                var clone = $('.answer_parent_edit').first().clone();
+              
+                clone.find('input[type="text"]').val(answer);
+                clone.find('input[type="radio"]').val(index).prop('checked', index == correctIndex);
+              
+                var radio = clone.find('input[type="radio"]');
+                var label = clone.find('label');
+              
+                radio.attr('id', 'radio' + counter);
+                radio.attr('name', 'questions_correct_answer');
+                label.attr('for', 'radio' + counter);
+              
                 $('.answer_parent_edit').last().after(clone);
                 counter++;
               }
