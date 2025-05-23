@@ -177,10 +177,10 @@ $(document).ready(function () {
 });
 
   </script>
-  <script>
+<script>
         $('.input-images').imageUploader();
         $('.input-images2').imageUploader2();
-   </script>
+</script>
 
 
 <script>

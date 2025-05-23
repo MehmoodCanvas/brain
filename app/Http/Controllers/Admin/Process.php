@@ -23,6 +23,7 @@ class Process extends Controller
     }
 
     public function update_question(Request $request,$id){
+
         $question= Questions::find($id);
         $question->questions_question=$request->questions_question;
         $question->questions_answer=json_encode($request->questions_answer);
@@ -50,18 +51,22 @@ class Process extends Controller
             $category = Category::find($id);
             $category->delete();
         }
+        
         if($path =='promo'){
             $promo = Promo::find($id);
             $promo->delete();
         }
+
         if($path =='blogs'){
             $blogs = Blogs::find($id);
             $blogs->delete();
         }
+
         if($path =='community-listing'){
             $communitylisting = Community_listing::find($id);            
             $communitylisting->delete();
         }
+
         if($path =='listing'){
             $listing = Listing::find($id);
             $listing->delete();
