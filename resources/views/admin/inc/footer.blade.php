@@ -121,7 +121,6 @@ $(document).ready(function () {
                 firstAnswer.find('input[type="text"]').val(answer);
                 firstAnswer.find('input[type="radio"]').val(index).prop('checked', index == correctIndex);
               
-                // Ensure the first radio button and label have unique id/for attributes
                 var radio = firstAnswer.find('input[type="radio"]');
                 var label = firstAnswer.find('label');
                 radio.attr('id', 'radio' + counter);
